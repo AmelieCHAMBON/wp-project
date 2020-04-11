@@ -1,0 +1,11 @@
+
+<section id="cibles" class="content">
+    <h2 class="titre_grid">Nos solutions sont parfaites pour</h2>
+    <div class="g3">
+        {% for cible in cibles %}
+            <div class="cibles_cible">
+                {% include ['Partials/List/_cible.twig'] %}
+            </div>
+        {% endfor %}
+    </div>
+</section>

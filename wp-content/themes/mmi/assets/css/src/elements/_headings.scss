@@ -1,0 +1,51 @@
+////
+/// Headings
+///
+/// @group Elements
+///
+////
+h1 {
+  margin: 2.5rem 0;
+  font-size: 3.5rem;
+}
+h2 {
+  margin: 2.5rem 0;
+  font-size: 2.4rem;
+
+  &.titre_grid {
+    margin: 0;
+    margin-bottom: 8rem;
+    font-family: $ff-bold;
+    font-size: 3.5rem;
+    line-height: 1.11;
+    text-align: center;
+  }
+  &.titre_séparé {
+      font-family: $ff-bold;
+      font-size: 8rem;
+      line-height: 1.09;
+      opacity: .5;
+      color: $seafoam-blue;
+  }
+}
+h3 {
+  margin: 2.5rem 0;
+  font-size: 2rem;
+}
+h4 {
+  margin: 2rem 0;
+  font-size: 1.8rem;
+}
+h5 {
+  margin: 2rem 0;
+  font-size: 1.6rem;
+}
+h6 {
+  margin: 1.5rem 0;
+  font-size: 1.4rem;
+}
+h1, h2, h3, h4, h5, h6 { 
+  line-height: normal;
+  letter-spacing: normal;
+  font-weight: $fw-bold; 
+}

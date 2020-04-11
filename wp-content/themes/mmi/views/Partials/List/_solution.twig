@@ -1,0 +1,15 @@
+{% block content %}
+    <section class="solutions_solution content g2 {{solution.class}}">
+        <div>
+            <h3>{{solution.nom}}</h3>
+            <h2>{{solution.accroche}}</h2>
+            <p>{{solution.description}}</p>
+            <a class="main-button" href=" {{solution.lien}}">Découvrir {{solution.nom}}</a>
+        </div>
+        <img src="{{theme.path}}/assets/img/{{solution.image}}" alt=""/>
+        
+		{% if solution.background %}
+            <img class="solutions_solution_background" src="{{theme.path}}/assets/img/{{solution.background}}" />
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,33 @@
+
+<nav id="footer_nav-infos"  class="nav-infos" role="navigation" role="navigation">
+    <div class="footer_nav-infos_elt">
+        <img src="{{theme.path}}/assets/img/kbcrawl-logo.svg" alt="Logo">
+    </div>
+    
+    <ul class="list-flex">
+        {% for item in menu.infos.get_items %}
+          <li class="footer_nav-infos_elt nav-item main-level {{item.classes | join(' ')}}">
+            <a class="nav-link" href="{{item.get_link}}">{{item.title}}</a>
+      
+            {% if item.get_children %}
+              <ul class="nav nav-drop">
+              {% for child in item.get_children %}
+                <li class="nav-drop-item {{child.classes | join(' ')}}">
+                  <a class="nav-link" href="{{child.get_link}}">{{child.title}}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+      
+          </li>
+        {% endfor %}
+        <li class="footer_nav-infos_elt  nav-item main-level">
+            <a class="nav-link" href="#">Newsletter</a>
+            <form>
+                <input type="email" placeholder="Votre email"/>
+                <button type="submit"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-right fa-w-14 fa-9x"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" class=""></path></svg></button>
+            </form>
+        </li>
+    </ul>
+      
+</nav>

@@ -1,0 +1,38 @@
+////
+/// Cibles
+///
+/// @group Components
+///
+////
+
+/// Contents
+#cibles {
+
+    & > div {
+        row-gap: 7.5rem;
+
+        & .cibles_cible {
+            padding: 0 9rem;
+    
+            & h3 {
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+                font-family: $ff-bold;
+                font-size: 2.2rem;
+            }
+    
+            & p {
+                margin: 0;
+                font-family: $ff-light;
+                font-size: 1.9rem;
+                line-height: 1.42;
+                color: $another-grey;
+            }
+            
+            & img {
+                width: 5.2rem;
+                height: auto;
+            }
+        }
+    }
+}

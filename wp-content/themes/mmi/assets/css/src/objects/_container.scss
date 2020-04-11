@@ -1,0 +1,48 @@
+////
+/// Page
+///
+/// @group Objects
+///
+////
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-margin {
+  max-width: 100%;
+  margin: auto;
+}
+
+.content {
+  padding: 0 15%;
+  width: 100%;
+}
+
+#content {
+  display: block;
+  margin: 0 auto;
+}
+
+section {
+  display: block;
+  margin: 8rem auto;
+}
+
+.img_crop {
+  width: 100%;
+
+  & img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 30rem;
+    border-radius: 1rem;
+  }
+}
+
+.beige {
+  background-color: $beige;
+}

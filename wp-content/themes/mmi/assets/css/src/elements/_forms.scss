@@ -1,0 +1,24 @@
+////
+/// Forms
+///
+/// @group Elements
+///
+////
+
+$type-list: text tel email url search date time datetime month week number;
+@each $type in $type-list {
+  [type="#{$type}"] {
+    padding: 1rem;
+    border: .1rem solid $ddd;
+    border-radius: .7rem;
+    background-color: $white;
+
+    &:focus { outline: none; }
+  }
+}
+select,
+textarea {
+  border: none; border-radius: 0; background-color: $white;
+
+  &:focus { outline: none; }
+}

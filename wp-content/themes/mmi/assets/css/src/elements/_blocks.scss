@@ -1,0 +1,25 @@
+////
+/// Headings
+///
+/// @group Elements
+///
+////
+
+/// Contents
+ul {
+    list-style: none;
+}
+li { margin: .5rem 0; }
+p { margin: 1.5rem 0; }
+p, li, td, th, textarea, caption, pre, blockquote, label, input, select, textarea { font-size: 1.4rem; line-height: 1.6; }
+td p, td .bodytext { 
+    margin: 0;
+    line-height: normal;
+    letter-spacing: normal; 
+}
+strong, optgroup { font-weight: $fw-bold; }
+
+img {
+    width: 100%;
+    height: auto;
+}

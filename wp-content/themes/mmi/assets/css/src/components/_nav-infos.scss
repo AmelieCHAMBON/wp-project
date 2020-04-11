@@ -1,0 +1,71 @@
+////
+/// 
+///
+/// @group Components
+///
+////
+
+/// Contents
+#footer_nav-infos {
+    width: 70%;
+    margin: 0 auto;
+    padding: 5rem 0;
+    display: grid;
+    grid-template-columns: calc(100% / 11 * 3) calc(100% / 11 * 8);
+
+    & img {
+        width: 60%;
+        height: auto;
+    }
+
+    & .footer_nav-infos_elt {
+
+        & > a {
+            margin-top: 0;
+            font-family: $ff-bold;
+            line-height: 2.17rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        & ul {
+            margin: 0;
+            margin-top: 1.5rem;
+            list-style: none;
+            padding: 0;
+
+            & li a {
+                color: $another-grey-50;
+                font-size: 1.5rem;
+                line-height: 1.73;
+            }
+        }
+        & form {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: .2rem solid $ddd;
+
+            & input {
+                width: 100%;
+                padding-left: 0;
+                border: 0;
+                border-radius: 0;
+
+                color: $another-grey-50;
+                font-size: 1.5rem;
+                line-height: 1.73;
+            }
+            & button {
+                width: max-content;
+                color: $seafoam-blue;
+                
+
+                & svg {
+                    width: max-content;
+                    color: $seafoam-blue;
+                    height: 1.5rem;
+                    width: auto;                    
+                }
+            }
+        }
+    }
+}

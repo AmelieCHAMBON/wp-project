@@ -1,0 +1,9 @@
+<section id="blog" class="content beige">
+  <h2 class="titre_grid">Le Blog</h2>
+  <div class="blog_list g3">
+    {% for post in posts|slice(0, 3) %}
+        {% include ['Partials/Article/List/_'~post.post_type~'.twig', 'Partials/List/_post.twig'] %}
+    {% endfor %}
+  </div>
+  <a class="main-button" href="">Plus d’articles</a>
+</section>

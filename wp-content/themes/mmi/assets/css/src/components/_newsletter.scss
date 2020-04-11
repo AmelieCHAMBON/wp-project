@@ -1,0 +1,46 @@
+////
+/// Newsletter
+///
+/// @group Components
+///
+////
+
+/// Contents
+#newsletter {
+    margin-bottom: 0;
+
+    & div {
+        padding-right: 6rem;
+        display: flex;
+        flex-direction: column;
+
+        & h2 {
+            margin-top: auto;
+            font-family: $ff-bold;
+            font-size: 5.2rem;
+        }
+    
+        & p {
+            font-family: $ff-light;
+            font-size: 3.4rem;
+            color: $another-grey;
+        }
+    
+        & form {
+            margin-bottom: auto;
+            width: 80%;
+            display: flex;
+    
+            & input {
+                width: 100%;
+                border: .1rem solid $ddd;
+                margin-right: 2rem;
+            }
+    
+            & button {
+                white-space: nowrap;
+                min-width: max-content;
+            }
+        }
+    }
+}

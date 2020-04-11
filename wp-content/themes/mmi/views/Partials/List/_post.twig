@@ -1,0 +1,11 @@
+{% block content %}
+	<a class="blog_post" href="{{post.link}}">
+		{% if post.get_thumbnail %}
+			<div class="img_crop">
+				<img src="{{post.thumbnail.src}}" />
+			</div>
+		{% endif %}
+		<h2 class="h2">{{post.title}}</h2>
+		<span>{{post.date('d M Y')}}</span>
+	</a>
+{% endblock %}

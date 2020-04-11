@@ -1,0 +1,28 @@
+////
+/// Headings
+///
+/// @group Components
+///
+////
+
+/// Contents
+.nav-main {
+    margin-left: 3rem;
+
+    & .nav-item {
+        margin-right: 3rem;  
+            
+        & a {
+            
+        }
+
+        & .g3 {
+            grid-column-gap: 4rem;
+        }
+
+        .nav-drop {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}

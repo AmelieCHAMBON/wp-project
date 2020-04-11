@@ -1,0 +1,32 @@
+////
+/// Separator
+///
+/// @group Components
+///
+////
+
+/// Contents
+.separator {
+    display: flex;
+    margin: 8rem auto;
+    width: 4rem;
+    height: 4rem;
+    border: .2rem solid $seafoam-blue;
+    border-radius: 50%;
+    opacity: .5;
+
+    & svg {
+        margin: auto;
+        width: 50%;
+        height: auto;
+        color: $seafoam-blue;
+        opacity: 1;
+    }
+}
+
+.separateur {
+    width: 30%;
+    height: 2.1rem;
+    opacity: .5;
+    background-color: $seafoam-blue;
+}

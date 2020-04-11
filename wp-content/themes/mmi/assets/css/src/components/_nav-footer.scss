@@ -1,0 +1,40 @@
+////
+/// 
+///
+/// @group Components
+///
+////
+
+/// Contents
+#footer_nav-footer {
+    width: 70%;
+    margin: 0 auto;
+    padding: 2.7rem 0;
+    border-top: .1rem solid $ddd;
+    justify-content: space-between;
+
+    & > ul {
+        & li {
+            margin-right: 3.4rem;
+        }
+    }
+
+    & .nav-link {
+        color: $another-grey;
+        font-family: $ff-light;
+        font-size: 1.4rem;
+        line-height: 1.06;
+    }
+
+    & .nav-footer_reseaux-sociaux {
+        & a {
+            margin: auto 0;
+            margin-left: 3.4rem;
+            
+            & img {
+                height: 1.6rem;
+                width: auto;
+            }
+        }
+    }
+}
