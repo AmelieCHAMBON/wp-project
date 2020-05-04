@@ -20,7 +20,16 @@ if ( ! class_exists( 'Timber' ) ) {
 $context = Timber::context();
 
 // We can access the loop of WordPress posts with the 'posts' variable.
-$context['posts'] = new Timber\PostQuery();
+$testimonyArgs = array(
+    // Get post type project
+    'post_type' => 'testimony',
+    // Get all posts
+    'posts_per_page' => 10,
+    // Order by post date
+    'orderby' => array(
+        'date' => 'DESC'
+    ));
+$context['testimonys'] = Timber::get_posts( $testimonyArgs );
 $context['intel_eco'] = array("background" => "bg-arrondi-bleu.svg");
 $context['solutions'] = array(
     array(
