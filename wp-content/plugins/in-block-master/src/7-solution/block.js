@@ -39,14 +39,14 @@ registerBlockType(BLOCK_NAME, {
     },
     displayClass: {
       type: 'string',
-      default: ''
+      default: 'ltr'
     }
   },
 
   edit: props => {
     const { attributes: { title, name, imageUrl, imageId, backgroundUrl, backgroundId, switchDisplay, displayClass }, setAttributes, className } = props
     if(switchDisplay == true) {
-        setAttributes( { displayClass : 'reverse' } )
+        setAttributes( { displayClass : 'rtl' } )
     }
     return(
       <>
@@ -56,25 +56,23 @@ registerBlockType(BLOCK_NAME, {
                     <div className="col-1">
                         <div>
                             <PlainText 
-                            keepplaceholderonfocus="true"
-                            placeholder={ __( 'Nom') }
-                            className={ className }
-                            value={name}
-                            onChange={ (name) => {
-                                setAttributes( name )
-                            } }
+                              keepplaceholderonfocus
+                              placeholder={ __( 'Nom') }
+                              className={ className }
+                              value={name}
+                              onChange={ (name) => {
+                                  setAttributes( {name} )
+                              } }
                             />
                             <PlainText 
-                            keepplaceholderonfocus="true"
-                            placeholder={ __( 'Titre / Accroche') }
-                            className={ className }
-                            value={title}
-                            onChange={ (title) => {
-                                setAttributes( title )
-                            } }
+                              keepplaceholderonfocus
+                              placeholder={ __( 'Titre / Accroche') }
+                              className={ className }
+                              value={title}
+                              onChange={ (title) => {setAttributes( {title} )}}
                             />
                             <div className={className + '__text'}>
-                            <InnerBlocks allowedBlocks={['core/paragraph']} />
+                            <InnerBlocks />
                             </div>
                         </div>
                     </div>
@@ -166,9 +164,9 @@ registerBlockType(BLOCK_NAME, {
                 label={__("Alterner l'image et les textes")}
                 checked={switchDisplay}
                 onChange={(switchDisplay) => { 
-                    let classD = "";
+                    let classD = "ltr";
                     if (switchDisplay == true) {
-                        classD = "reverse";
+                        classD = "rtl";
                     }
                     setAttributes({ switchDisplay: switchDisplay, displayClass: classD }) 
                 }}
@@ -181,18 +179,25 @@ registerBlockType(BLOCK_NAME, {
     )
   },
 
-  save: ({ attributes: { title, name, imageUrl, imageId, backgroundUrl, backgroundId, switchDisplay } }) => (
-    <section class="solutions_solution content g2">
+  save: ({ attributes: { title, name, imageUrl, imageId, backgroundUrl, backgroundId, displayClass } }) => (
+    <section class={"solutions_solution content g2 "+displayClass}>
         <div>
-            <h3>{{name}}</h3>
-            <h2>{{title}}</h2>
-            <p><InnerBlocks.Content /></p>
-            <a class="main-button" href=" {{solution.lien}}">Découvrir {{name}}</a>
+
+          <h3>{name}</h3>
+          
+          <h2>{title}</h2>
+
+          <p><InnerBlocks.Content /></p>
+
+           <a class="main-button" href="#">Découvrir {name}</a>
+
         </div>
+
         <img src={imageUrl} alt=""/>
         
-		{backgroundUrl &&
-                <img class="solutions_solution_background" src={backgroundUrl} />}
+		    {backgroundUrl &&
+                <img class="solutions_solution_background" src={backgroundUrl} />
+        }
             
         
     </section>

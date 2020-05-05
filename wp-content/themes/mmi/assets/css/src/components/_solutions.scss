@@ -52,6 +52,11 @@
             font-size: 3.5rem;
             line-height: 1.11;
             margin: 0;
+            &.imp {
+                margin-top: auto;
+                font-family: $ff-bold;
+                font-size: 5.2rem;
+            } 
         }
 
         & h3 {

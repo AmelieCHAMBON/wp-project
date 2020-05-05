@@ -3,7 +3,7 @@ import { PLUGIN_NAME } from '../constants'
 const { wp } = window
 const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
-const { InspectorControls, MediaPlaceholder, InnerBlocks, PlainText } = wp.blockEditor
+const { InspectorControls, MediaPlaceholder, PlainText, RichText } = wp.blockEditor
 const { Button, RadioControl } = wp.components
 
 const BLOCK_NAME = `${PLUGIN_NAME}/cibles`
@@ -14,7 +14,7 @@ registerBlockType(BLOCK_NAME, {
   icon: 'grid-view',
   category: 'layout',
   attributes: {
-    title: {
+    titre: {
       type: "string",
       default: ""
     },
@@ -27,17 +27,19 @@ registerBlockType(BLOCK_NAME, {
   },
 
   edit: props => {
-    const { attributes: { title = '', content = [], nbGrid = '2' }, setAttributes, className } = props
+    const { attributes: { titre = '', content = [], nbGrid = '2' }, setAttributes, className } = props
     return (
       <>
       <section className="separator grid-cible">
-      <PlainText
-                keepplaceholderonfocus
-                placeholder={__('Titre de la grille de cible')}
-                value={title}
-                onChange={(title) => {setAttributes({ title })
-                }}
-              />
+
+        <PlainText
+          keepplaceholderonfocus
+          placeholder={__('Titre de la grille de cible')}
+          value={titre}
+          onChange={(titre) => {setAttributes({ titre })
+          }}
+        />
+
         {content.map((value, index) => {
           return (
             <>
@@ -70,7 +72,16 @@ registerBlockType(BLOCK_NAME, {
                 }}
               />
               <div className={className + '__text'}>
-              <InnerBlocks allowedBlocks={['core/paragraph']} />
+              <RichText
+                tagName="h2"
+                className={ className }
+                value={ value.paragraph }
+                onChange={(paragraph) => {
+                  const newContent = [...content]
+                  newContent[index].paragraph = paragraph
+                  setAttributes({ content: newContent })
+                }}
+              />
               </div>
               <Button isTertiary
                 onClick={() => {
@@ -114,17 +125,17 @@ registerBlockType(BLOCK_NAME, {
   },
 
   save: props => {
-    const { attributes: {  title, nbGrid, content } } = props
+    const { attributes: {  titre, nbGrid, content } } = props
     return (
       <section className="content cibles">
-        <h2 className="titre_grid">{{title}}</h2>
+        <h2 className="titre_grid">{titre}</h2>
         <div className={"g"+nbGrid}>
             {content.map((item, index) => {
               return (
                 <div className="cibles_cible"  key={`cible-${index}`}>
                     <img src={item.imageUrl} alt=""/>
                     <h3>{item.title}</h3>
-                    <p><InnerBlocks.Content /></p>
+                    <p>{item.paragraph}</p>
                 </div>
               )
             })}

@@ -3,9 +3,8 @@ import { PLUGIN_NAME } from '../constants'
 const { wp } = window
 const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
-const { InspectorControls } = wp.blockEditor
-const { RadioControl, ToggleControl, BaseControl } = wp.components
-const { PlainText } = wp.blockEditor
+const { Button, RadioControl, ToggleControl, BaseControl } = wp.components
+const { InspectorControls, PlainText, URLInputButton, MediaPlaceholder } = wp.blockEditor
 
 const BLOCK_NAME = `${PLUGIN_NAME}/blog`
 
@@ -15,15 +14,13 @@ registerBlockType(BLOCK_NAME, {
   icon: 'grid-view',
   category: 'widgets',
   attributes: {
-    title: {
-      type: 'string'
+    titre: {
+      type: 'string',
+      default: ""
     },
     nbGrid: {
-        type: 'number',
-        default: 2
-    },
-    nbArticles: {
-        type: 'number'
+        type: 'string',
+        default: "2"
     },
     bgColor: {
         type: 'boolean',
@@ -36,11 +33,14 @@ registerBlockType(BLOCK_NAME, {
     switchDisplay: {
       type: 'boolean',
       default: true
+    },
+    content: {
+      type: 'array'
     }
   },
 
   edit: props => {
-    const { attributes: { title, nbGrid = 2, nbArticles = nbGrid, bgColor, bgColorClass, switchDisplay }, setAttributes, className } = props
+    const { attributes: { titre = '', nbGrid = "2", bgColor, bgColorClass, switchDisplay, content = [] }, setAttributes, className } = props
     if(bgColor == true) {
         setAttributes( { bgColorClass : 'beige ' } )
     }
@@ -48,17 +48,89 @@ registerBlockType(BLOCK_NAME, {
       <>
         <section className={className}>
             <h2>Blog</h2>
-            <PlainText 
-                keepplaceholderonfocus="true"
-                placeholder={ __( 'Titre / Accroche') }
-                className={ className + '_titre' }
-                value={title}
-                onChange={ (title) => {
-                    setAttributes( title )
-                } }
+
+            <PlainText
+            keepplaceholderonfocus
+            placeholder={__('Titre / Accroche de la section Blog')}
+            value={titre}
+            onChange={(titre) => {setAttributes({ titre })
+            }}
             />
-            <p>Vos articles seront ensuite affiché en-dessous du titre ci-dessus.</p>
             
+            {content.map((value, index) => {
+                return (
+                    <>
+                    <div className="blog-elt">
+                        <div className={className + '__image'}>
+                            {content[index].imageUrl ? (
+                                <img src={content[index].imageUrl} alt='' />
+                            ) : (
+                                <MediaPlaceholder
+                                onSelect={(media) => {
+                                    const newContent = [...content]
+                                    newContent[index].imageUrl = media.url
+                                    newContent[index].imageId = media.id
+                                    setAttributes({ content: newContent })}}
+                                allowedTypes={['image']}
+                                multiple={false}
+                                labels={{ title: 'Image de l\'article' }}
+                                />
+                            )}
+                        </div>
+
+                        <PlainText
+                            keepplaceholderonfocus
+                            placeholder={__('Titre de l\'article')}
+                            value={value.title}
+                            onChange={(title) => {
+                            const newContent = [...content]
+                            newContent[index].title = title
+                            setAttributes({ content: newContent })
+                            }}
+                        />
+
+                        <PlainText
+                            keepplaceholderonfocus
+                            placeholder={__('Date de l\'article (Exemple : 12 fév 2019)')}
+                            value={value.date}
+                            onChange={(date) => {
+                            const newContent = [...content]
+                            newContent[index].date = date
+                            setAttributes({ content: newContent })
+                            }}
+                        />
+
+                        <URLInputButton
+                            url={ value.url }
+                            onChange={(url) => {
+                            const newContent = [...content]
+                            newContent[index].url = url
+                            setAttributes({ content: newContent })
+                            }}
+                        />
+                    </div>
+                    <Button isTertiary
+                        onClick={() => {
+                        const newContent = [
+                            ...content.slice(0, index),
+                            ...content.slice(index + 1)
+                        ]
+                        setAttributes({ content: newContent })
+                        }}
+                    >{__('Supprimer')}
+                    </Button>
+                    </>
+                )
+            })}
+                
+        <Button isPrimary 
+          onClick={() => {
+            const newContent = [...content, {}]
+            setAttributes({ content: newContent })
+          }}
+        >{__('Ajouter')}
+        </Button>
+
         <InspectorControls>
             <BaseControl>
                 <RadioControl
@@ -66,26 +138,12 @@ registerBlockType(BLOCK_NAME, {
                     help="Le nombre de colonnes de la grille à l'affichage"
                     selected={ nbGrid }
                     options={ [
-                        { label: '2 colonnes', value: 2 },
-                        { label: '3 colonnes', value: 3 },
-                        { label: '4 colonnes', value: 4 },
-                        { label: '5 colonnes', value: 5 },
+                        { label: '2 colonnes', value: "2" },
+                        { label: '3 colonnes', value: "3" },
+                        { label: '4 colonnes', value: "4" },
+                        { label: '5 colonnes', value: "5" },
                     ] }
                     onChange={( nbGrid ) => { setAttributes({ nbGrid }) }}
-                />
-            </BaseControl>
-            <BaseControl>
-                <RadioControl
-                    label="Nombre maximum d'articles à afficher'"
-                    help="La limite d'articles à ne pas dépasser"
-                    selected={ nbArticles }
-                    options={ [
-                        { label: (nbGrid*1)+' articles', value: (nbGrid*1) },
-                        { label: (nbGrid*2)+' articles', value: (nbGrid*2) },
-                        { label: (nbGrid*3)+' articles', value: (nbGrid*3) },
-                        { label: (nbGrid*4)+' articles', value: (nbGrid*4) },
-                    ] }
-                    onChange={( nbArticles ) => { setAttributes({ nbArticles }) }}
                 />
             </BaseControl>
             <BaseControl>
@@ -104,11 +162,21 @@ registerBlockType(BLOCK_NAME, {
     )
   },
 
-  save: ({ attributes: { title, nbGrid, nbArticles, bgColorClass, switchDisplay } }) => (
+  save: ({ attributes: { titre, nbGrid, bgColorClass, switchDisplay, content = [] } }) => (
     <section className={"content " + bgColorClass + "blog-preview"}>
-        <h2>{{title}}</h2>
+        <h2 class="titre_grid">{titre}</h2>
         <div className={"blog_list " + "g" + nbGrid}>
-            {JSON.stringify(nbArticles)} max articles affichés
+            {content.map((item, index) => {
+                return (                    
+                    <a class="blog_post" href={item.url} key={`blog_post-${index}`}>
+                        <div class="img_crop">
+                            <img src={item.imageUrl} />
+                        </div>
+                        <h2 class="h2">{item.title}</h2> 
+                        <span>{item.date}</span>
+                    </a>
+                )
+            })}
         </div>
         
         {switchDisplay &&

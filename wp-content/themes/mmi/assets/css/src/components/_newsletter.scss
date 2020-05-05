@@ -6,9 +6,8 @@
 ////
 
 /// Contents
-#newsletter {
+#newsletter, .newsletter {
     margin-bottom: 0;
-
     & div {
         padding-right: 6rem;
         display: flex;
@@ -25,22 +24,22 @@
             font-size: 3.4rem;
             color: $another-grey;
         }
-    
-        & form {
-            margin-bottom: auto;
-            width: 80%;
-            display: flex;
-    
-            & input {
-                width: 100%;
-                border: .1rem solid $ddd;
-                margin-right: 2rem;
-            }
-    
-            & button {
-                white-space: nowrap;
-                min-width: max-content;
-            }
-        }
+    }
+} 
+
+form.news {
+    margin-bottom: auto;
+    width: 80%;
+    display: flex;
+
+    & input {
+        width: 100%;
+        border: .1rem solid $ddd;
+        margin-right: 2rem;
+    }
+
+    & button {
+        white-space: nowrap;
+        min-width: max-content;
     }
 }

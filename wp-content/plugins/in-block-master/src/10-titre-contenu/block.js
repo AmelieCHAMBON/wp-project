@@ -40,7 +40,7 @@ registerBlockType(BLOCK_NAME, {
                             className={ className }
                             value={title}
                             onChange={ (title) => {
-                                setAttributes( title )
+                                setAttributes( {title} )
                             } }
                             />
                         </div>
@@ -101,7 +101,7 @@ registerBlockType(BLOCK_NAME, {
   save: ({ attributes: { title, backgroundUrl } }) => (
     <section class="content g2 titre-contenu">
         <div>
-            <h2 class="titre_séparé">{{title}}</h2>
+            <h2 class="titre_séparé">{title}</h2>
             <div class="separateur"></div>
         </div>
         <div>
