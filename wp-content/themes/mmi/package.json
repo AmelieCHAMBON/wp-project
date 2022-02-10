@@ -6,7 +6,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "npm-watch": "^0.6.0"
   },
   "watch": {
